@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var connection = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options
 .UseMySql(connection,
 new MySqlServerVersion
 (new Version(10, 4, 21))));
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -31,6 +35,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
