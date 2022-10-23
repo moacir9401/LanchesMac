@@ -1,7 +1,18 @@
+using LanchesMac.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+var connection = builder.Configuration["ConnectionStrings:DefaultConnection"];
+
+builder.Services.AddDbContext<AppDbContext>(options => options
+.UseMySql(connection,
+new MySqlServerVersion
+(new Version(10, 4, 21))));
 
 var app = builder.Build();
 
