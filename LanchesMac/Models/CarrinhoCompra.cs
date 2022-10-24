@@ -82,7 +82,7 @@ namespace LanchesMac.Models
             return quantidadeTotal;
         }
 
-        public IEnumerable<CarrinhoCompraItem> GetCarrinhoCompraItems()
+        public IEnumerable<CarrinhoCompraItem> GetCarrinhoCompraItens()
         {
             return CarrinhoCompraItems ?? (CarrinhoCompraItems =
                 _context.CarrinhoCompraItens.Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
