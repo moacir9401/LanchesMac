@@ -1,4 +1,5 @@
-﻿using LanchesMac.Repositories.Interfaces;
+﻿using LanchesMac.Models;
+using LanchesMac.Repositories.Interfaces;
 using LanchesMac.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -15,14 +16,40 @@ namespace LanchesMac.Controllers
             _lancheRepository = lancheRepository;
         }
 
-        public IActionResult List()
+        public IActionResult List(string categoria)
         {
-            var lanchesListViewModel = new LancheListViewModel();
+            IEnumerable<Lanche> lanches;
+            string categoriaAtual = string.Empty;
 
-            lanchesListViewModel.Lanches = _lancheRepository.Lanches;
-            lanchesListViewModel.CategoriaAtual = "Categoria Atual";
+            if (string.IsNullOrEmpty(categoria))
+            {
+                lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
+                categoriaAtual = "Todos os Lanches";
+            }
+            else
+            {
+                lanches = _lancheRepository.Lanches
+                    .Where(l => l.Categoria.CategoriaNome.Equals(categoria))
+                    .OrderBy(l => l.Nome); 
+
+                categoriaAtual = categoria;
+            }
+
+            var lanchesListViewModel = new LancheListViewModel()
+            {
+                Lanches = lanches,
+                CategoriaAtual = categoriaAtual,
+            };
 
             return View(lanchesListViewModel);
+        }
+
+        public IActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRepository.Lanches
+                .FirstOrDefault(l => l.LancheId == lancheId);
+
+            return View(lanche);
         }
     }
 }
