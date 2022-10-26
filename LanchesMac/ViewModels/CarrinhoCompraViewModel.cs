@@ -2,7 +2,7 @@
 
 namespace LanchesMac.ViewModels
 {
-    public class CarinhoCompraViewModel
+    public class CarrinhoCompraViewModel
     {
         public CarrinhoCompra CarrinhoCompra { get; set; }
         public decimal CarrinhoCompraTotal { get; set; }
