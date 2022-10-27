@@ -16,7 +16,7 @@ namespace LanchesMac.Models
         }
 
         public string CarrinhoCompraId { get; set; }
-        public IEnumerable<CarrinhoCompraItem> CarrinhoCompraItems { get; set; }
+        public IEnumerable<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
         public static CarrinhoCompra GetCarrinho(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
@@ -84,7 +84,7 @@ namespace LanchesMac.Models
 
         public IEnumerable<CarrinhoCompraItem> GetCarrinhoCompraItens()
         {
-            return CarrinhoCompraItems ?? (CarrinhoCompraItems =
+            return CarrinhoCompraItens ?? (CarrinhoCompraItens =
                 _context.CarrinhoCompraItens.Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
                 .Include(s => s.Lanche).ToList());
         }
