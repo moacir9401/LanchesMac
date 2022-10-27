@@ -74,7 +74,7 @@ namespace LanchesMac.Controllers
                     categoriaAtual = "Nenhum lanche foi encontrados";
             }
 
-            return View("~/Views/Lanches/List.cshtml", new LancheListViewModel
+            return View("~/Views/Lanche/List.cshtml", new LancheListViewModel
             {
                 Lanches = lanches,
                 CategoriaAtual = categoriaAtual
