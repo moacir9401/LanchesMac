@@ -16,8 +16,7 @@ namespace LanchesMac.Controllers
         {
             _lancheRepository = lancheRepository;
         }
-
-        []
+         
         public IActionResult List(string categoria)
         {
             IEnumerable<Lanche> lanches;
