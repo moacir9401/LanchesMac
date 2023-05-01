@@ -4,6 +4,7 @@ using LanchesMac.Repositories.Interfaces;
 using LanchesMac.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ builder.Services.AddAuthorization(options =>
         {
             politica.RequireRole("Admin");
         });
-}); 
+});
 
 var connection = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
@@ -46,6 +47,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 3;
     options.Password.RequiredUniqueChars = 1;
 });
+ 
+builder.Services.AddPaging(options =>
+{
+    options.ViewName = "Bootstrap4";
+    options.PageParameterName = "pageIndex";
+});
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
@@ -56,7 +63,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-     
+
     app.UseHsts();
 }
 
