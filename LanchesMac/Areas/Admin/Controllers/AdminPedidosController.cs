@@ -177,7 +177,7 @@ namespace LanchesMac.Areas.Admin.Controllers
             if (pedido == null)
             {
                 Response.StatusCode = 404;
-                return RedirectToAction("PedidoNotFound", id.Value);
+                return View("PedidoNotFound", id.Value);
             }
 
             PedidoLancheViewModel pedidosLanches = new ()
