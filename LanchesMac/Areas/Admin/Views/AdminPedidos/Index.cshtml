@@ -4,26 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h3>Pedidos</h3>
 
 <form method="get" class="form-inline">
+    
     <input name="filter" class="form-control" placeholder="filtro"
            value="@Model.RouteValue["Filter"]" />
 
-    <button type="submit" class="btn btn-info">
-        <span class="glyphicon glyphicon-search" aria-hidden="true">Procurar</span>
-    </button> 
+    <button type="submit" class="btn btn-info">Procurar</button>
 </form>
 
-
-Total de Pedidos: @Model.TotalRecordCount
+Total de Pedidos : @Model.TotalRecordCount
 <div>
-    <vc:pager paging-list="@Model"></vc:pager>
+   <vc:pager paging-list="@Model"></vc:pager>
 </div>
+
+<p>
+    <a asp-action="Create">Criar novo Pedido</a>
+</p>
 
 <table class="table">
     <thead>
@@ -102,9 +100,9 @@ Total de Pedidos: @Model.TotalRecordCount
                     @Html.DisplayFor(modelItem => item.PedidoEntregueEm)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PedidoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PedidoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PedidoId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.PedidoId">Edita</a> |
+                    <a asp-action="Details" asp-route-id="@item.PedidoId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PedidoId">Deleta</a>
                 </td>
             </tr>
         }
