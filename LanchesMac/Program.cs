@@ -19,6 +19,8 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 builder.Services.AddScoped<RelatorioVendasService>();
+builder.Services.Configure<ConfigurationImagens>(builder.Configuration.GetSection("ConfigurationPastaImagens"));
+
 
 builder.Services.AddAuthorization(options =>
 {
